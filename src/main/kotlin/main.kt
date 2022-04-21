@@ -7,10 +7,20 @@ fun main(){
     myAccount.details()
     var mySavings=SavingsAccount("0113362507","Marie Loop",23000.00,1)
     mySavings.withdrawal(2000.00)
-    mySavings.withdrawals
+    println( mySavings.balance)
+    mySavings.withdrawal(2000.00)
+    println( mySavings.balance)
+    mySavings.withdrawal(2000.00)
+    println( mySavings.balance)
+    mySavings.withdrawal(2000.00)
+    println( mySavings.balance)
     mySavings.deposit(1000.00)
     mySavings.balance
-    word("Tomato")
+    println( word("Tomato"))
+     shop(Product("kituli",23.56,50.25,"groceries"))
+
+
+
 
 }
  open class CurrentAccount(var accountNumber:String, var accountName:String, var balance:Double){
@@ -31,24 +41,38 @@ fun main(){
 }
 class SavingsAccount(accountNumber: String,accountName: String, balance: Double,var withdrawals:Int):CurrentAccount(accountNumber,accountName,balance){
     override fun withdrawal(amount: Double) {
-       // super.withdrawal(amount)
         if(withdrawals<4 ){
             withdrawals++
+            super.withdrawal(amount)
             println(withdrawals)
+        }
+        else{
+            println("reached maximun withdrawal")
         }
 
     }
 }
 data class Product(var name:String, var weight: Double, var price: Double, var category:String)
-//fun takeProduct(word:String):List<String>{
-//
-//
-//}
+fun shop(product:Product) {
+    var groceriesList = mutableListOf<Product>()
+    var hygieneList = mutableListOf<Product>()
+    var otherList = mutableListOf<Product>()
+    when(product.category){
+        "groceries"-> groceriesList.add(product)
+        "hygiene"-> hygieneList.add(product)
+        else->otherList.add(product)
+    }
+    println(groceriesList)
+    println(hygieneList)
+    println(otherList)
+
+}
 fun word(name:String):String{
+    var y=""
     name.forEachIndexed { index, c ->
         if (index%2==0){
-            print(c)
+            y+=c
         }
     }
-    return name
+    return y
 }
